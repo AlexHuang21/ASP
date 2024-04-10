@@ -20,13 +20,19 @@ module output_stage #(parameter data_size = 32, parameter tag_size = 8) (
     localparam OP_RXA = 2'b10;
     localparam OP_TXE = 2'b01;
     
-    assign and_gate_1 = (tag_match_in & (opcode_in == OP_RXA));
-    assign or_gate_1 = (parity_error_out | and_gate_1);
-    assign and_gate_2 = (~parity_error_out & (opcode_in == OP_TXE));
-    assign or_gate_2 = (and_gate_2 | and_gate_1);
+    // AND gates ordered from top to bottom in datapath diagram
+    assign and_gate_1 = (opcode_in == OP_RXA);
+    assign and_gate_2 = (opcode_in == OP_TXE);
+    assign and_gate_3 = (~parity_error_out & and_gate_2);
+    assign and_gate_4 = (tag_match_in & and_gate_1);
     
-    assign mux_1 = (and_gate_1 | parity_error_out) ? tx_data_in : rx_data_in;
-    assign mux_2 = (and_gate_1 | (opcode_in == OP_RXA)) ? tx_data_plus_tag_in : ndt_in;
+    // OR gates ordered from top to bottom in datapath diagram
+    assign or_gate_1 = (parity_error_out | and_gate_4);
+    assign or_gate_2 = (and_gate_3 | and_gate_4);
+    
+    // MUX's ordered from top to bottom
+    assign mux_1 = parity_error_out ? tx_data_in : rx_data_in;
+    assign mux_2 = (opcode_in == OP_TXE) ? tx_data_plus_tag_in : ndt_in;
     
     always @(posedge clk) begin
         if (reset) begin
@@ -40,7 +46,7 @@ module output_stage #(parameter data_size = 32, parameter tag_size = 8) (
             parity_error_out <= soft_error_in;
             host_data_ready_out <= or_gate_1;
             network_data_ready_out <= or_gate_2;
-            network_ack_out <= and_gate_1; 
+            network_ack_out <= and_gate_4; 
             host_data_out <= mux_1;
             ndt_out <= mux_2;
         end
