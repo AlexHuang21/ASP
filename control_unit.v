@@ -17,11 +17,10 @@ module control_unit(
             opcode_out <= 2'b00;
         end else begin    
             case ({dpp_ready_in, nd_ready_in, na_in}) 
-                3'b000: opcode_out <= OP_NOP;
+                default: opcode_out <= OP_NOP;
                 3'b100: opcode_out <= OP_TXE;
                 3'b010: opcode_out <= OP_RXA;
                 3'b001: opcode_out <= OP_LOG;
-                default: opcode_out <= 2'bxx; // Undefined input
              endcase 
         end        
     end
