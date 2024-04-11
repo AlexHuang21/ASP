@@ -34,7 +34,7 @@ module output_stage #(parameter data_size = 32, parameter tag_size = 8) (
     assign mux_1 = parity_error_out ? tx_data_in : rx_data_in;
     assign mux_2 = (opcode_in == OP_TXE) ? tx_data_plus_tag_in : ndt_in;
     
-    always @(posedge clk) begin
+    always @(negedge clk) begin
         if (reset) begin
             parity_error_out <= 0;
             host_data_ready_out <= 0;
