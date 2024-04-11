@@ -1,7 +1,6 @@
 module tag_generation #(
     parameter DATA_SIZE = 32,  // Parameter for the size of data
-    parameter TAG_SIZE = 8,    // Parameter for the size of the tag
-    parameter KEY_SIZE = 16    // Parameter for the size of the secret key
+    parameter TAG_SIZE = 8    // Parameter for the size of the tag
 ) (
     input wire clk,                  // Clock signal
     input wire reset,                // Reset signal
@@ -9,8 +8,8 @@ module tag_generation #(
     output reg [TAG_SIZE-1:0] tag    // Tag output
 );
 
-// Assume SECRET_KEY is a parameter passed to the module or hardcoded within it.
-parameter [KEY_SIZE-1:0] SECRET_KEY = 16'hDEAD; // Secret key
+// Assume SECRET_KEY is hardcoded.
+parameter [15:0] SECRET_KEY = 16'hDEAD; // Secret key
 
 // Internal signal for the combined tag result, declared as a reg for use within always blocks
 reg [TAG_SIZE-1:0] xor_result;

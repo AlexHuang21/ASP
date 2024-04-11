@@ -13,16 +13,8 @@ module stage_1 #(parameter data_size = 32, parameter tag_size = 8) (
 
     // Network Data Plus Tag (NDT) (data_size+tag_size bits)
     input[(data_size+tag_size-1):0] ndt_in,
-    output reg[(data_size+tag_size-1):0] ndt_out,
-
-    // Separate Data / Parity signals for Soft Error Detection Module
-    output[data_size-1:0] data_out,
-    output parity_out
+    output reg[(data_size+tag_size-1):0] ndt_out
 );
-
-    // Parity is the LAST bit of DPP
-    assign data_out = dpp_out[(data_size):1];
-    assign parity_out = dpp_out[0];
 
     // Reset/Update outputs on positive edge of clock
     always @(posedge clk) begin

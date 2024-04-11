@@ -26,16 +26,13 @@ module stage_3 #(parameter data_size = 32, parameter tag_size = 8) (
     output reg[(data_size+tag_size-1):0] ndt_out,
 
     // RX/TX Signals (More to come)
-    output[(data_size-1):0] rx_data, 
-    output[(data_size-1):0] tx_data, 
+    output[(data_size-1):0] rx_data_out,
     output[(data_size+tag_size-1):0] tx_data_plus_tag
 );
     // Data from the network
     // Note that the tag is the last (tag_size) bits of NDT
     assign rx_data = ndt_out[(data_size+tag_size-1):tag_size];
 
-    // Data from the host that has been parity checked (DPP). Should be sent back to host in case of soft error detection.
-    assign tx_data = tx_data_out[(data_size-1):0];
     // Data from the host with its computed tag to be sent over the network if there is no soft error
     assign tx_data_plus_tag = {tx_data_out,tx_tag_out};
 

@@ -19,15 +19,11 @@ module stage_2 #(parameter data_size = 32, parameter tag_size = 8) (
     input[(data_size+tag_size-1):0] ndt_in,
     output reg[(data_size+tag_size-1):0] ndt_out,
 
-    // RX/TX Signal for MUX
-    output rx_tx,
+    // RX/TX Signals for MUX
     output[(data_size-1):0] rx_data, 
     output[(data_size-1):0] tx_data,
     output[(tag_size-1):0] rx_tag
 );
-
-    // DS: This depends on what opcodes Duncan and Alex choose
-    assign rx_tx = opcode_out[0];
 
     // Data from the host that has been parity checked (DPP)
     assign tx_data = dpp_out[(data_size):1];
