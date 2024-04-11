@@ -31,6 +31,8 @@ module output_stage #(parameter data_size = 32, parameter tag_size = 8) (
     assign or_gate_2 = (and_gate_3 | and_gate_4);
     
     // MUX's ordered from top to bottom
+    wire [(data_size-1):0] mux_1;
+    wire [(data_size+tag_size-1):0] mux_2;
     assign mux_1 = parity_error_out ? tx_data_in : rx_data_in;
     assign mux_2 = (opcode_in == OP_TXE) ? tx_data_plus_tag_in : ndt_in;
     
