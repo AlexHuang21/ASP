@@ -1,5 +1,5 @@
 $date
-	Thu Apr 11 13:04:22 2024
+	Thu Apr 11 13:32:46 2024
 $end
 $version
 	Icarus Verilog
@@ -22,19 +22,19 @@ $var reg 1 + network_data_ready_in $end
 $var reg 40 , network_data_tag_in [39:0] $end
 $var reg 1 - reset $end
 $scope module ASP_inst $end
-$var wire 32 . OL_rx_data [31:0] $end
 $var wire 1 ' clk $end
-$var wire 33 / data_parity_in [32:0] $end
+$var wire 33 . data_parity_in [32:0] $end
 $var wire 1 ) data_parity_ready_in $end
-$var wire 32 0 layer2_TGEN_data_in [31:0] $end
+$var wire 32 / layer2_TGEN_data_in [31:0] $end
 $var wire 1 * network_ACK_in $end
 $var wire 1 + network_data_ready_in $end
-$var wire 40 1 network_data_tag_in [39:0] $end
+$var wire 40 0 network_data_tag_in [39:0] $end
 $var wire 1 - reset $end
 $var wire 1 ! parity_error_out $end
-$var wire 40 2 network_data_tag_out [39:0] $end
+$var wire 40 1 network_data_tag_out [39:0] $end
 $var wire 1 # network_data_ready_out $end
 $var wire 1 $ network_ACK_out $end
+$var wire 19456 2 log_memory [19455:0] $end
 $var wire 32 3 layer2_tx_data [31:0] $end
 $var wire 1 4 layer2_tag_match $end
 $var wire 8 5 layer2_rx_tag [7:0] $end
@@ -54,16 +54,17 @@ $var wire 8 A OL_tx_tag [7:0] $end
 $var wire 40 B OL_tx_data_tagged [39:0] $end
 $var wire 32 C OL_tx_data [31:0] $end
 $var wire 1 D OL_tag_match $end
-$var wire 2 E OL_opcode [1:0] $end
-$var wire 40 F OL_ndt [39:0] $end
-$var wire 1 G OL_error_detected $end
-$var wire 2 H ID_opcode [1:0] $end
+$var wire 32 E OL_rx_data [31:0] $end
+$var wire 2 F OL_opcode [1:0] $end
+$var wire 40 G OL_ndt [39:0] $end
+$var wire 1 H OL_error_detected $end
+$var wire 2 I ID_opcode [1:0] $end
 $scope module SED_inst $end
 $var wire 1 ' clk $end
-$var wire 32 I data [31:0] $end
-$var wire 1 J parity_bit $end
+$var wire 32 J data [31:0] $end
+$var wire 1 K parity_bit $end
 $var wire 1 - reset $end
-$var wire 1 K calculated_parity $end
+$var wire 1 L calculated_parity $end
 $var reg 1 > soft_error_flag $end
 $upscope $end
 $scope module control_unit_inst $end
@@ -72,88 +73,99 @@ $var wire 1 ) dpp_ready_in $end
 $var wire 1 * na_in $end
 $var wire 1 + nd_ready_in $end
 $var wire 1 - reset $end
-$var reg 2 L opcode_out [1:0] $end
+$var reg 2 M opcode_out [1:0] $end
 $upscope $end
 $scope module id_l1_pipeline_reg $end
 $var wire 1 ' clk $end
-$var wire 33 M dpp_in [32:0] $end
-$var wire 40 N ndt_in [39:0] $end
-$var wire 2 O opcode_in [1:0] $end
+$var wire 33 N dpp_in [32:0] $end
+$var wire 40 O ndt_in [39:0] $end
+$var wire 2 P opcode_in [1:0] $end
 $var wire 1 - reset $end
-$var reg 33 P dpp_out [32:0] $end
-$var reg 40 Q ndt_out [39:0] $end
-$var reg 2 R opcode_out [1:0] $end
+$var reg 33 Q dpp_out [32:0] $end
+$var reg 40 R ndt_out [39:0] $end
+$var reg 2 S opcode_out [1:0] $end
 $upscope $end
 $scope module l1_l2_pipeline_reg $end
 $var wire 1 ' clk $end
-$var wire 33 S dpp_in [32:0] $end
-$var wire 40 T ndt_in [39:0] $end
-$var wire 2 U opcode_in [1:0] $end
+$var wire 33 T dpp_in [32:0] $end
+$var wire 40 U ndt_in [39:0] $end
+$var wire 2 V opcode_in [1:0] $end
 $var wire 1 - reset $end
 $var wire 1 > soft_error_in $end
-$var wire 32 V tx_data [31:0] $end
-$var wire 8 W rx_tag [7:0] $end
-$var wire 32 X rx_data [31:0] $end
-$var reg 33 Y dpp_out [32:0] $end
-$var reg 40 Z ndt_out [39:0] $end
-$var reg 2 [ opcode_out [1:0] $end
+$var wire 32 W tx_data [31:0] $end
+$var wire 8 X rx_tag [7:0] $end
+$var wire 32 Y rx_data [31:0] $end
+$var reg 33 Z dpp_out [32:0] $end
+$var reg 40 [ ndt_out [39:0] $end
+$var reg 2 \ opcode_out [1:0] $end
 $var reg 1 9 soft_error_out $end
 $upscope $end
 $scope module l2_ol_pipeline_reg $end
 $var wire 1 ' clk $end
-$var wire 40 \ ndt_in [39:0] $end
-$var wire 2 ] opcode_in [1:0] $end
+$var wire 40 ] ndt_in [39:0] $end
+$var wire 2 ^ opcode_in [1:0] $end
 $var wire 1 - reset $end
-$var wire 32 ^ rx_data_out [31:0] $end
 $var wire 1 9 soft_error_in $end
 $var wire 1 4 tag_match_in $end
 $var wire 32 _ tx_data_in [31:0] $end
 $var wire 8 ` tx_tag_in [7:0] $end
 $var wire 40 a tx_data_plus_tag [39:0] $end
-$var wire 1 b rx_data $end
+$var wire 32 b rx_data_out [31:0] $end
 $var reg 40 c ndt_out [39:0] $end
 $var reg 2 d opcode_out [1:0] $end
-$var reg 1 G soft_error_out $end
+$var reg 1 H soft_error_out $end
 $var reg 1 D tag_match_out $end
 $var reg 32 e tx_data_out [31:0] $end
 $var reg 8 f tx_tag_out [7:0] $end
 $upscope $end
-$scope module output_stage_inst $end
-$var wire 1 g and_gate_3 $end
-$var wire 1 h and_gate_4 $end
+$scope module log_inst $end
 $var wire 1 ' clk $end
-$var wire 40 i ndt_in [39:0] $end
-$var wire 2 j opcode_in [1:0] $end
-$var wire 1 k or_gate_1 $end
-$var wire 1 l or_gate_2 $end
+$var wire 32 g host_data_in [31:0] $end
+$var wire 40 h ndt_in [39:0] $end
+$var wire 1 H parity_error_in $end
 $var wire 1 - reset $end
-$var wire 32 m rx_data_in [31:0] $end
-$var wire 1 G soft_error_in $end
+$var wire 1 # network_data_ready_in $end
+$var wire 1 $ network_ack_in $end
+$var wire 1 % host_data_ready_in $end
+$var reg 19456 i log_memory [19455:0] $end
+$var integer 32 j i [31:0] $end
+$upscope $end
+$scope module output_stage_inst $end
+$var wire 1 k and_gate_3 $end
+$var wire 1 l and_gate_4 $end
+$var wire 1 ' clk $end
+$var wire 40 m ndt_in [39:0] $end
+$var wire 2 n opcode_in [1:0] $end
+$var wire 1 o or_gate_1 $end
+$var wire 1 p or_gate_2 $end
+$var wire 1 - reset $end
+$var wire 32 q rx_data_in [31:0] $end
+$var wire 1 H soft_error_in $end
 $var wire 1 D tag_match_in $end
-$var wire 32 n tx_data_in [31:0] $end
-$var wire 40 o tx_data_plus_tag_in [39:0] $end
-$var wire 8 p tx_tag_in [7:0] $end
-$var wire 1 q mux_2 $end
-$var wire 1 r mux_1 $end
-$var wire 1 s and_gate_2 $end
-$var wire 1 t and_gate_1 $end
-$var reg 32 u host_data_out [31:0] $end
+$var wire 32 r tx_data_in [31:0] $end
+$var wire 40 s tx_data_plus_tag_in [39:0] $end
+$var wire 8 t tx_tag_in [7:0] $end
+$var wire 40 u mux_2 [39:0] $end
+$var wire 32 v mux_1 [31:0] $end
+$var wire 1 w and_gate_2 $end
+$var wire 1 x and_gate_1 $end
+$var reg 32 y host_data_out [31:0] $end
 $var reg 1 % host_data_ready_out $end
-$var reg 40 v ndt_out [39:0] $end
+$var reg 40 z ndt_out [39:0] $end
 $var reg 1 $ network_ack_out $end
 $var reg 1 # network_data_ready_out $end
 $var reg 1 ! parity_error_out $end
 $upscope $end
 $scope module tag_gen_inst $end
 $var wire 1 ' clk $end
-$var wire 32 w data [31:0] $end
+$var wire 32 { data [31:0] $end
 $var wire 1 - reset $end
-$var reg 8 x tag [7:0] $end
-$var reg 8 y xor_result [7:0] $end
-$var integer 32 z j [31:0] $end
+$var reg 8 | tag [7:0] $end
+$var reg 8 } xor_result [7:0] $end
+$var integer 32 ~ j [31:0] $end
 $scope function RLS_FUNCTION $end
-$var reg 8 { block [7:0] $end
-$var integer 32 | bits [31:0] $end
+$var reg 8 !" block [7:0] $end
+$var integer 32 "" bits [31:0] $end
 $upscope $end
 $scope begin gen_bf_rls[0] $end
 $upscope $end
@@ -169,37 +181,41 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b10 |
-bx {
+b10 ""
+bx !"
+bx ~
+bx }
+bx |
+bz {
 bx z
 bx y
-bx x
-bz w
-b0x v
-b0x u
-xt
-xs
-xr
-xq
-bx p
-bx o
+xx
+xw
+bx v
+bx u
+bx t
+bx s
+bx r
+bx q
+xp
+xo
 bx n
-bz m
+bx m
 xl
 xk
-bx j
+b0 j
 bx i
-xh
-xg
+bx h
+bx g
 bx f
 bx e
 bx d
 bx c
-xb
+bx b
 bx a
 bx `
 bx _
-bz ^
+bx ^
 bx ]
 bx \
 bx [
@@ -214,22 +230,22 @@ bx S
 bx R
 bx Q
 bx P
-bx O
+b0 O
 b0 N
-b0 M
-bx L
+bx M
+xL
 xK
-xJ
+bx J
 bx I
-bx H
-xG
+xH
+bx G
 bx F
 bx E
 xD
 bx C
 bx B
 bx A
-b0x @
+bx @
 bx ?
 x>
 bx =
@@ -243,11 +259,11 @@ bx 6
 bx 5
 x4
 bx 3
-b0x 2
-b0 1
-bz 0
-b0 /
-bz .
+bx 2
+bx 1
+b0 0
+bz /
+b0 .
 0-
 b0 ,
 0+
@@ -255,41 +271,41 @@ b0 ,
 0)
 b0 (
 0'
-b0x &
+bx &
 x%
 x$
 x#
-b0x "
+bx "
 x!
 $end
 #5
-0J
 0K
+0L
+b0 J
 b0 I
-b0 H
-b0 L
-b0 O
+b0 M
+b0 P
 b0 =
+b0 R
+b0 U
+b0 ?
 b0 Q
 b0 T
-b0 ?
-b0 P
-b0 S
 1>
-b100 z
+b1 j
+b100 ~
 1'
 #10
-zr
 b0 ;
 b0 `
-b0 x
-b0 y
+b0 |
+b0 }
 b0 "
-b0 2
-b0 v
+b0 1
+b0 z
 b0 &
 b0 @
-b0 u
+b0 y
 0$
 0#
 0%
@@ -297,72 +313,79 @@ b0 u
 1-
 0'
 #15
-0b
-0k
+b0 v
+0o
+0p
+b0 E
+b0 b
+b0 q
 0l
-0q
-0h
-0g
+0k
+b0 u
 b0 6
-b0 X
+b0 Y
 14
 b0 5
-b0 W
+b0 X
 b0 3
-b0 V
+b0 W
 b0 _
-b0 F
-b0 c
+b0 2
 b0 i
+b0 G
+b0 c
+b0 h
+b0 m
 0D
 b0 A
 b0 f
-b0 p
+b0 t
 b0 B
 b0 a
-b0 o
+b0 s
 b0 C
 b0 e
-b0 n
-0G
-0t
-0s
-b0 E
+b0 g
+b0 r
+0H
+0x
+0w
+b0 F
 b0 d
-b0 j
+b0 n
 b0 8
-b0 Z
-b0 \
-b0 :
-b0 Y
-09
-b0 7
 b0 [
 b0 ]
+b0 :
+b0 Z
+09
+b0 7
+b0 \
+b0 ^
 0>
 b0 <
-b0 R
-b0 U
+b0 S
+b0 V
+b0 j
 1'
 #20
 0'
 #25
 1D
-bx y
-b100 z
+b1 j
+bx }
+b100 ~
 0-
 1'
 #30
-b0z &
-b0z @
-b0z u
 0'
 #35
+b10 j
 x4
 bx ;
 bx `
-bx x
-b100 z
+bx |
+b100 ~
 1'
 #40
 0'
@@ -370,34 +393,40 @@ b100 z
 xD
 b0xxxxxxxx B
 b0xxxxxxxx a
-b0xxxxxxxx o
+b0xxxxxxxx s
 bx A
 bx f
-bx p
-b100 z
+bx t
+b11 j
+b100 ~
 1'
 #50
 0'
 #55
-b100 z
+b100 j
+b100 ~
 1'
 #60
 0'
 #65
-b100 z
+b101 j
+b100 ~
 1'
 #70
 0'
 #75
-b100 z
+b110 j
+b100 ~
 1'
 #80
 0'
 #85
-b100 z
+b111 j
+b100 ~
 1'
 #90
 0'
 #95
-b100 z
+b1000 j
+b100 ~
 1'

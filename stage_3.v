@@ -31,7 +31,7 @@ module stage_3 #(parameter data_size = 32, parameter tag_size = 8) (
 );
     // Data from the network
     // Note that the tag is the last (tag_size) bits of NDT
-    assign rx_data = ndt_out[(data_size+tag_size-1):tag_size];
+    assign rx_data_out = ndt_out[(data_size+tag_size-1):tag_size];
 
     // Data from the host with its computed tag to be sent over the network if there is no soft error
     assign tx_data_plus_tag = {tx_data_out,tx_tag_out};

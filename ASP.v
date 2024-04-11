@@ -1,4 +1,4 @@
-module ASP #(parameter data_size = 32, parameter tag_size = 8) (
+module ASP #(parameter data_size = 32, parameter tag_size = 8, parameter mem_depth = 256) (
     // Control Inputs
     input clk,
     input reset,
@@ -92,4 +92,7 @@ module ASP #(parameter data_size = 32, parameter tag_size = 8) (
     // Output Stage Module
     output_stage output_stage_inst(clk, reset, OL_opcode, OL_error_detected, OL_tx_data, OL_tx_tag, OL_tx_data_tagged, OL_tag_match, OL_rx_data, OL_ndt, parity_error_out, host_data_ready_out, network_data_ready_out, network_ACK_out, host_data_out, network_data_tag_out);
 
+    // Logging Module
+    wire[mem_depth-1:0][75:0] log_memory;
+    log #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size), .MEM_DEPTH(mem_depth)) log_inst(clk, reset, OL_error_detected, host_data_ready_out, network_data_ready_out, network_ACK_out, OL_tx_data, OL_ndt, log_memory);
 endmodule
