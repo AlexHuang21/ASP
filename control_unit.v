@@ -17,6 +17,7 @@ module control_unit(
             opcode_out <= 2'b00;
         end else begin    
             case ({dpp_ready_in, nd_ready_in, na_in}) 
+                // Dylan: I think we should change this to a priority system. What happens if we get a signal from the network and the host at the same time?
                 default: opcode_out <= OP_NOP;
                 3'b100: opcode_out <= OP_TXE;
                 3'b010: opcode_out <= OP_RXA;
