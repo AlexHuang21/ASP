@@ -32,13 +32,15 @@ module ASP_TXE_tb();
 
         // Initialization
         clk = 0;
-        reset = 0;
+        reset = 1;
         data_parity_ready_in = 0;
         data_parity_in = 0;
         network_data_ready_in = 0;
         network_ACK_in = 0;
         network_data_tag_in = 0;
         #10
+        #10
+        reset = 0;
 
         // Test case 1: Data transmission with no soft error
         data_parity_ready_in = 1;
@@ -55,6 +57,12 @@ module ASP_TXE_tb();
         data_parity_in = 33'b101001011010010110100101101001011; // data plus incorrect parity bit (1)
         network_data_tag_in = 0;
         #20;
+        #20;
+        #20;
+        #20;
+        #20;
+        #20;
+        
         
         $finish;
 	end

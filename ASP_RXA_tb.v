@@ -32,13 +32,15 @@ module ASP_RXA_tb();
 
         // Initialization
         clk = 0;
-        reset = 0;
+        reset = 1;
         data_parity_ready_in = 0;
         data_parity_in = 0;
         network_data_ready_in = 0;
         network_ACK_in = 0;
         network_data_tag_in = 0;
         #10
+        #10
+        reset = 0;
 
         // Test case 1: Received data with correct tag
         data_parity_ready_in = 0;
@@ -46,7 +48,7 @@ module ASP_RXA_tb();
         network_ACK_in = 0;
         data_parity_in = 0; 
         network_data_tag_in = 40'h1234AB; // 32-bit data from network (0x1234) with correct 8-bit appended tag (0xAB)
-        #20;
+        #20
 
         // Test case 2: Received data with incorrect tag
         data_parity_ready_in = 0;
@@ -54,7 +56,10 @@ module ASP_RXA_tb();
         network_ACK_in = 0;
         data_parity_in = 0; 
         network_data_tag_in = 40'h1234AC; // 32-bit data from network (0x1234) with incorrect 8-bit appended tag (0xAC)
-        #20;
+        #20
+        #20
+        #20
+        #20
         
         $finish;
 	end
