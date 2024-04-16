@@ -18,7 +18,7 @@ module soft_error_detection #(parameter data_size = 32) (
                 // No soft error detected
                 soft_error_flag <= 1'b0;
             end else begin
-                // Soft error detectedI'm
+                // Soft error detected
                 soft_error_flag <= 1'b1;
             end
         end   
