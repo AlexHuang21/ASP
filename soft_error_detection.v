@@ -10,7 +10,7 @@ module soft_error_detection #(parameter data_size = 32) (
     wire calculated_parity = ^data;
     
     // Check if the calulcated parity matches the recevied parity bit
-    always @(posedge clk) begin
+    always @(*) begin
         if (reset) begin
             soft_error_flag <= 1'b0;
         end else begin    

@@ -66,10 +66,14 @@ module ASP #(parameter data_size = 32, parameter tag_size = 8, parameter mem_dep
     wire[15:0] secret_key;
 
     // Multiplexer
-    // Will assign layer2_TGEN_data_in to either layer2_tx_data or layer2_rx_data depending on the opcode.
+    localparam OP_TXE = 2'b01;
+    assign layer2_TGEN_data_in = (layer2_opcode == OP_TXE) ? layer2_tx_data : layer2_rx_data;
+    
+    // Secret Key Register
+    secret_key_register skr_inst(secret_key);
 
     // Tag Generator
-    tag_generation #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size)) tag_gen_inst(clk, reset, layer2_TGEN_data_in, layer2_computed_tag);
+    tag_generation #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size)) tag_gen_inst(clk, reset, layer2_TGEN_data_in, secret_key, layer2_computed_tag);
 
     // Comparator
     assign layer2_tag_match = (layer2_computed_tag == layer2_rx_tag);
@@ -88,11 +92,11 @@ module ASP #(parameter data_size = 32, parameter tag_size = 8, parameter mem_dep
     wire[(data_size-1):0] OL_rx_data;
     wire[(data_size+tag_size-1):0] OL_ndt;
     wire OL_error_detected;
+    wire[75:0] OL_log_item;
 
     // Output Stage Module
     output_stage output_stage_inst(clk, reset, OL_opcode, OL_error_detected, OL_tx_data, OL_tx_tag, OL_tx_data_tagged, OL_tag_match, OL_rx_data, OL_ndt, parity_error_out, host_data_ready_out, network_data_ready_out, network_ACK_out, host_data_out, network_data_tag_out);
 
     // Logging Module
-    wire[mem_depth-1:0][75:0] log_memory;
-    log #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size), .MEM_DEPTH(mem_depth)) log_inst(clk, reset, OL_error_detected, host_data_ready_out, network_data_ready_out, network_ACK_out, OL_tx_data, OL_ndt, log_memory);
+    log #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size), .MEM_DEPTH(mem_depth)) log_inst(clk, reset, OL_error_detected, host_data_ready_out, network_data_ready_out, network_ACK_out, OL_tx_data, OL_ndt, OL_log_item);
 endmodule

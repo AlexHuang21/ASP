@@ -11,20 +11,26 @@ module log #(
     input network_ack_in,
     input [DATA_SIZE-1:0] host_data_in,
     input [DATA_SIZE+TAG_SIZE-1:0] ndt_in,
-    output reg [MEM_DEPTH-1:0][75:0] log_memory  // Memory to store log items
+    output reg[75:0] log_item
 );
 
+reg[MEM_DEPTH-1:0] log_memory[75:0];
+
 integer i = 0;  // Memory write pointer
+
+wire[75:0] log_item_wire = {parity_error_in, host_data_ready_in, network_data_ready_in, network_ack_in, host_data_in, ndt_in};
 
 always @(posedge clk) begin
     if (reset) begin
         for (i = 0; i < MEM_DEPTH; i = i + 1) begin
             log_memory[i] <= 76'd0;
         end
+        log_item <= 0;
         i <= 0;
     end else if (i < MEM_DEPTH) begin
         // Condense all inputs into one item and store in memory
-        log_memory[i] <= {parity_error_in, host_data_ready_in, network_data_ready_in, network_ack_in, host_data_in, ndt_in};
+        log_memory[i] <= log_item_wire;
+        log_item <= log_item_wire;
         i <= i + 1;  // Increment memory pointer
     end
 end

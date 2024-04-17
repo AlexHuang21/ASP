@@ -12,30 +12,22 @@ module control_unit(
     localparam OP_RXA = 2'b10;
     localparam OP_LOG = 2'b11;
     
-    always @(posedge clk) begin 
+    always @(*) begin 
         if (reset) begin
             opcode_out <= OP_NOP;
         end else begin
             
             // priority system which prioritizes receving
-            if (nd_ready_in) begin
+            if (na_in && nd_ready_in) begin
+                opcode_out <= OP_LOG;      
+            end else if (nd_ready_in) begin
                 opcode_out <= OP_RXA;
             end else if (dpp_ready_in) begin
                 opcode_out <= OP_TXE;
-            end else if (na_in) begin
-                opcode_out <= OP_LOG;
             end else begin
-                opcode_out = OP_NOP;
+                opcode_out <= OP_NOP;
             end
 
-            // OLD version, non-priority system
-            //case ({dpp_ready_in, nd_ready_in, na_in}) 
-                // Dylan: I think we should change this to a priority system. What happens if we get a signal from the network and the host at the same time?
-                //default: opcode_out <= OP_NOP;
-                //3'b100: opcode_out <= OP_TXE;
-                //3'b010: opcode_out <= OP_RXA;
-                //3'b001: opcode_out <= OP_LOG;
-             //endcase 
         end        
     end
     
