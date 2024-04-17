@@ -17,7 +17,7 @@ module control_unit(
             opcode_out <= OP_NOP;
         end else begin
             
-            // priority system which prioritizes receving
+            // priority system which prioritizes receiving
             if (na_in && nd_ready_in) begin
                 opcode_out <= OP_LOG;      
             end else if (nd_ready_in) begin

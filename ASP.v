@@ -73,7 +73,7 @@ module ASP #(parameter data_size = 32, parameter tag_size = 8, parameter mem_dep
     secret_key_register skr_inst(secret_key);
 
     // Tag Generator
-    tag_generation #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size)) tag_gen_inst(clk, reset, layer2_TGEN_data_in, secret_key, layer2_computed_tag);
+    tag_generation #(.DATA_SIZE(data_size)) tag_gen_inst(clk, reset, layer2_TGEN_data_in, secret_key, layer2_computed_tag);
 
     // Comparator
     assign layer2_tag_match = (layer2_computed_tag == layer2_rx_tag);
@@ -98,5 +98,5 @@ module ASP #(parameter data_size = 32, parameter tag_size = 8, parameter mem_dep
     output_stage output_stage_inst(clk, reset, OL_opcode, OL_error_detected, OL_tx_data, OL_tx_tag, OL_tx_data_tagged, OL_tag_match, OL_rx_data, OL_ndt, parity_error_out, host_data_ready_out, network_data_ready_out, network_ACK_out, host_data_out, network_data_tag_out);
 
     // Logging Module
-    log #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size), .MEM_DEPTH(mem_depth)) log_inst(clk, reset, OL_error_detected, host_data_ready_out, network_data_ready_out, network_ACK_out, OL_tx_data, OL_ndt, OL_log_item);
+    log #(.DATA_SIZE(data_size), .TAG_SIZE(tag_size), .MEM_DEPTH(mem_depth)) log_inst(clk, reset, OL_opcode, OL_tag_match, OL_error_detected, host_data_ready_out, network_data_ready_out, network_ACK_out, OL_tx_data, OL_ndt, OL_log_item);
 endmodule
